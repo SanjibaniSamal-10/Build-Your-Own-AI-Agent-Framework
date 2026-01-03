@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+venv/
+.env/
+
+# Airflow
+airflow/logs/
+airflow/db/
+airflow/*.db
+
+# Kafka
+kafka/logs/
+kafka-logs/
+
+# OpenVINO / ML
+*.onnx
+*.pt
+*.bin
+*.xml
+*.blob
+openvino_cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
