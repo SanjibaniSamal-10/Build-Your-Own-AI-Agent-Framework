@@ -93,4 +93,5 @@ python kafka/producer.py
 
 
 # Output Example
-output1.jpeg
+![Alt text] output1.jpeg
+![Alt text] output2.jpeg
