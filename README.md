@@ -93,4 +93,4 @@ python kafka/producer.py
 
 
 # Output Example
-
+output1.jpeg
