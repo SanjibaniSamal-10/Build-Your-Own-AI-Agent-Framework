@@ -205,7 +205,8 @@ agentflow-framework/
 ├── LIMITATION.md            # Known limitations
 ├── SETUP_GUIDE.md           # Installation & setup
 ├── README.md
-└── LICENSE 
+└── LICENSE
+```
 ---
 ## Agents Included
 
