@@ -42,12 +42,11 @@ Intel® DevCloud or Intel® Xeon–based systems.
 ## Reproducibility
 
 Benchmark scripts are provided in:
-
+```
 intel/benchmark/
-
 ├── benchmark_pytorch.py
 ├── benchmark_openvino.py
-
+```
 These scripts can be executed on Intel DevCloud or Intel Xeon systems to
 reproduce and validate the above indicative results.
 
