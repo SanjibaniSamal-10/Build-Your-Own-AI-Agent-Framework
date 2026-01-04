@@ -351,7 +351,8 @@ python kafka/producer.py
 
 # Output Example
 ![image alt](https://github.com/SanjibaniSamal-10/Build-Your-Own-AI-Agent-Framework/blob/2fbe8873e6079a153aa5ac1d38a81b0c6569e1b9/output1.jpeg)
-![Alt text] output2.jpeg
+
+![image alt](https://github.com/SanjibaniSamal-10/Build-Your-Own-AI-Agent-Framework/blob/789143a2b935856ce8c1b51924221a062fd63bb2/output2.jpeg)
 
 ---
 ##  Airflow Integration (Optional)
