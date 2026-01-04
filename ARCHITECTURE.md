@@ -13,6 +13,7 @@ The system is designed around **event-driven execution**, **task flow orchestrat
 ## 2. High-Level Architecture
 
 The AgentFlow architecture follows a layered pipeline:
+
 Ingress (Kafka / REST) 
       ↓ 
 Orchestrator 
@@ -24,7 +25,11 @@ Agents (Executors)
 State / Memory / Guardrails 
       ↓ 
 Output Handler
-Each layer is decoupled, extensible, and independently testable.
+
+Each layer is:
+- Loosely coupled
+- Independently testable
+- Extensible without impacting other components
 
 ---
 
@@ -202,22 +207,23 @@ Airflow is **optional** and complements Kafka-based execution.
 
 ## 5. Intel Optimization Architecture
 
-**Purpose:** Accelerate ML inference using Intel hardware.
+**Purpose:** Enable CPU-optimized ML inference on Intel platforms.
 
 **Implementation:**
 - PyTorch model: `intel/model/pytorch_model.py`
 - OpenVINO model: `intel/model/openvino_model.py`
-- Benchmarks: `intel/benchmark/`
+- Benchmark scripts: `intel/benchmark/`
 
 **Flow:**
-ML Model → PyTorch (Baseline) → OpenVINO (Optimized) → Performance Comparison
+ML Model → PyTorch (Baseline) → OpenVINO (Optimized) → Performance Evaluation
 
-This enables:
-- CPU-optimized inference
-- Lower latency
-- Production readiness on Intel platforms
+This design is **intended to support**:
+- Intel CPU–optimized inference
+- Reduced latency (expected)
+- Seamless backend switching without agent changes
 
----
+> Note: Performance improvements depend on execution on Intel Xeon or DevCloud
+> environments and are documented as indicative.
 
 ## 6. Design Principles
 
@@ -245,8 +251,17 @@ This enables:
 | Output | Result delivery |
 
 ---
+## 8. Execution Modes
 
-## 8. Conclusion
+AgentFlow supports multiple execution modes:
+
+- Event-driven execution (Kafka-based)
+- Synchronous local execution (development/testing)
+- Scheduled execution (Apache Airflow – optional)
+
+This allows the framework to scale from local prototyping to
+enterprise-grade deployment environments.
+## 9. Conclusion
 
 AgentFlow’s architecture provides a **robust foundation for building, executing, and monitoring agentic workflows**.
 It supports multi-agent collaboration, Apache-based orchestration, and Intel-optimized ML execution while remaining
