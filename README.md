@@ -1,7 +1,8 @@
 #  Build-Your-Own AI Agent Framework – AgentFlow
 
 AgentFlow is a **custom-built AI Agent Framework** (not just an application) that orchestrates **agentic workflows from input to output**.  
-The framework enables users to **define task flows composed of multiple agents**, execute them reliably, monitor execution, and audit results.
+The framework enables users to **define task flows composed of multiple agents**, execute them reliably, monitor execution, and audit results using Apache-based
+messaging and orchestration..
 
 AgentFlow is built **without using existing agent frameworks** such as **crew.ai, AutoGen, or n8n**, and integrates **Apache technologies** for messaging and orchestration.  
 It is designed to support **Intel® OpenVINO™ optimizations** for ML-based agents.
@@ -10,19 +11,50 @@ It is designed to support **Intel® OpenVINO™ optimizations** for ML-based age
 
 ##  Problem Statement Alignment
 
-**Problem Statement – Build Your Own AI Agent Framework**
+This project fully addresses **Problem Statement – Build-Your-Own AI Agent Framework**:
 
-AgentFlow satisfies the requirements by providing:
-- A **framework SDK**, not a single-purpose app
-- **Composable agent workflows**
-- **Execution orchestration**
-- **Monitoring, observability, and auditing**
-- **Apache-based infrastructure**
-- **Intel optimization readiness**
+✔ Framework (not an app)  
+✔ Agentic workflow orchestration  
+✔ Task flows (DAG-style execution)  
+✔ Monitoring and observability  
+✔ Apache Kafka & optional Airflow integration  
+✔ Multi-agent collaboration  
+✔ Intel OpenVINO performance optimization  
 
 ---
 
-## ✅ Requirement Coverage Matrix
+##  Core Features
+
+- Define and execute **agentic task flows**
+- Kafka-based **input ingestion**
+- Custom **orchestrator and executor**
+- Three working agents:
+  - Reference Agent
+  - Research Agent
+  - Collab Agent
+- Shared memory and state handling
+- Guardrails and observability
+- Intel OpenVINO optimized ML inference
+- Optional Apache Airflow DAG support
+
+---
+
+## Architecture Overview
+
+```text
+Ingress (Kafka / REST)
+        ↓
+    Orchestrator
+        ↓
+  Task Flow Engine
+        ↓
+Agents (Executors)
+        ↓
+State / Memory / Guardrails
+        ↓
+   Output Handler
+```
+## Requirement Coverage Matrix
 
 | Requirement | Status |
 |------------|--------|
@@ -54,7 +86,7 @@ You **build agents and workflows on top of AgentFlow**, making it a reusable fra
 
 ---
 
-## 🏗 Architecture Overview
+##  Architecture Overview
 
 Ingress (Kafka / REST)
     ↓
@@ -97,7 +129,70 @@ Output Handler
 | Human-in-the-loop | Hooks can be added in `guardrails.py` |
 
 ---
+## Project Structure 
+agentflow-framework/
+├── __pycache__
+├── agentflow/
+|   ├── __pycache__
+|   ├── init.py
+│   ├── task.py              # Task abstraction
+│   ├── flow.py              # Task flow (DAG-style execution)
+│   ├── orchestrator.py      # Central workflow controller
+│   ├── executor.py          # Task execution engine
+│   ├── memory.py            # Shared memory/state
+│   ├── guardrails.py        # Safety & policy checks
+│   └── observability.py     # Logs & metrics
+│
+├── agents/
+|   ├── __pycache__
+│   ├── reference_agent.py   # Reference agent
+│   ├── research_agent.py    # Research agent
+│   └── collab_agent.py      # Collaboration agent
+│
+├── executors/
+|   ├── __pycache__
+│   ├── search.py            # Search tool
+│   └── summarize.py         # Summarization tool
+│
+├── kafka/
+│   ├── producer.py          # Kafka producer (input)
+│   └── consumer.py          # Kafka consumer (ingress)
+│
+├── airflow_dag/
+│   └── agentflow_dag.py     # Optional Airflow DAG
+│
+├── intel/
+│   ├── model/
+│   │   ├── pytorch_model.py
+│   │   └── openvino_model.py
+│   ├── benchmark/
+│   │   ├── benchmark_pytorch.py
+│   │   ├── benchmark_openvino.py
+│   │   └── results.md
+|   ├── devcloud_setup.md
+├── io/
+│   ├── input_handler.py          
+│   └── output_handler.py
+├── venv/
+|   ├── bin/
+│   ├── Include/
+│   ├── Lib/
+|   ├── Scripts/
+│   └── pyvenv.cfg
+│
+├── run_agent.py             # Framework entry point
+├── ARCHITECTURE.md
+├── DESIGN_DOC.md
+├── benchmark.md
+├── PERFORMANCE_REPORT.md
+├── OBSERVABILITY.md
+├── WORKFLOW.md
+├── LIMITATION.md
+├── SETUP_GUIDE.md
+├── README.md
+└── LICENSE
 
+---
 ## Agents Included
 
 ### 1️⃣ Reference Agent
@@ -141,14 +236,22 @@ These agents together demonstrate **real agentic workflows**, not static pipelin
 
 ---
 
-##  Example Workflow
+##  Agent Workflows
 
-1. User sends input via Kafka Producer
-2. Orchestrator receives the message
-3. Reference Agent generates a baseline response
-4. Research Agent enriches the information
-5. Collab Agent refines the final output
-6. Output is logged and published
+### Workflow 1: Research & Summarize
+1. Input received via Kafka
+
+2. Orchestrator initializes flow
+3. Research Agent collects information
+4. Reference Agent validates facts
+5. Collab Agent refines response
+6. Output generated
+
+### Workflow 2: Multi-Agent Collaboration
+
+1. Agents share memory
+2. Results refined iteratively
+3. Enables collaboration and reflection
 
 ---
 ##  Intel® OpenVINO™ Integration
@@ -168,17 +271,45 @@ result = model.infer(input_data)
 ---
 ## Observability & Auditing
 AgentFlow provides:
+
 Execution logs
 Agent-level metrics
 Workflow traceability
 Error visibility
 This enables monitoring, debugging, and auditing of agent workflows.
+
+Metrics Collected
+
+Task execution time
+Total workflow latency
+Failure counts
+
+Logging
+
+Task start/end
+Agent decisions
+Errors and retries
+
 ---
 ## Guardrails & Safety
+
 Policy checks before and after execution
 Human-in-the-loop extension points
 Pluggable rule-based enforcement
+
 --- 
+## Apache Integration
+
+### Kafka (Ingress & Messaging)
+1. Handles input ingestion
+2. Enables asynchronous execution
+3. Decouples producers and agents
+
+### Airflow 
+Used for:
+1.Scheduled execution
+2.Retry handling
+3.Fault tolerance
 ## How to Run (Minimal Demo)
 
 ### Start Kafka
@@ -197,7 +328,7 @@ python kafka/producer.py
 ![Alt text] output2.jpeg
 
 ---
-## 🧩 Airflow Integration (Optional)
+##  Airflow Integration (Optional)
 
 AgentFlow includes an **Apache Airflow DAG** to enable production-grade orchestration.
 
@@ -215,8 +346,25 @@ airflow_dag/agentflow_dag.py
 airflow dags trigger agentflow_dag
 ```
 ---
+## Intel OpenVINO Optimization
+AgentFlow supports Intel optimization for ML inference.
+
+Benchmark Summary
+
+Model   |  Avg Latency  | Throughput
+PyTorch |  125 ms      |  1×
+OpenVINO |  45 ms     | 2.6×
+
+Benefits
+
+1. ~64% latency reduction
+2. Faster agent responses
+3. CPU-efficient execution
+
+Detailed benchmarks are available in benchmark.md
 
 ## Deliverables Included
+
 This repository fulfills all required deliverables:
 
 ✅ Framework SDK for defining flows, agents, and policies
@@ -238,6 +386,10 @@ Collaboration Agent
 ✅ Benchmark scripts (PyTorch vs OpenVINO)
 
 ---
+## ⚠️ Limitations
+1. Airflow not natively supported on Windows
+2. In-memory storage (demo purpose)
+3. Limited agent reasoning depth (extensible)
 
 ## Conclusion
 AgentFlow is a production-oriented AI Agent Framework that:
