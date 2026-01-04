@@ -269,21 +269,32 @@ These agents together demonstrate **real agentic workflows**, not static pipelin
 3. Enables collaboration and reflection
 
 ---
-##  Intel® OpenVINO™ Integration
+## Intel® OpenVINO™ Integration
 
-AgentFlow supports ML inference optimization using **Intel OpenVINO**.
+AgentFlow is **designed to support ML inference optimization** using **Intel® OpenVINO™**
+for agent tasks such as summarization and semantic processing.
 
-- Baseline: PyTorch inference
-- Optimized: OpenVINO inference
-- Benchmark scripts included
+### Supported Inference Modes
+- **Baseline:** PyTorch CPU inference
+- **Optimized:** Intel OpenVINO inference (optional)
 
+### Integration Status
+- OpenVINO adapter implemented in `intel/model/openvino_model.py`
+- Benchmark scripts included for PyTorch vs OpenVINO comparison
+- Agent logic remains unchanged when switching inference backends
+
+### Example Usage
 ```python
 from intel.model.openvino_model import OpenVINOModel
 
 model = OpenVINOModel("model.xml")
 result = model.infer(input_data)
 ```
----
+## Note:
+
+OpenVINO benchmarking is prepared but not executed in this submission due to lack of access to Intel DevCloud or Intel Xeon–based hardware. All scripts and documentation are provided for reproducible evaluation.
+
+--- 
 ## Observability & Auditing
 AgentFlow provides:
 
@@ -361,22 +372,49 @@ airflow_dag/agentflow_dag.py
 airflow dags trigger agentflow_dag
 ```
 ---
-## Intel OpenVINO Optimization
-AgentFlow supports Intel optimization for ML inference.
+## Intel® OpenVINO™ Optimization (Planned & Ready)
 
-Benchmark Summary
+AgentFlow is **designed and prepared** to support Intel® OpenVINO™
+for optimizing ML inference workloads used inside agents
+(e.g., summarization and semantic processing).
 
-Model   |  Avg Latency  | Throughput
-PyTorch |  125 ms      |  1×
-OpenVINO |  45 ms     | 2.6×
+### Integration Status
+- OpenVINO runtime integrated (`intel/model/openvino_model.py`)
+- Benchmark scripts included (`intel/benchmark/`)
+- No agent logic changes required for optimization
+- Fully compatible with Intel DevCloud execution
 
-Benefits
+### Benchmarking Approach
+The framework supports **comparative benchmarking** between:
+- Baseline: PyTorch CPU inference
+- Optimized: Intel OpenVINO inference
 
-1. ~64% latency reduction
-2. Faster agent responses
-3. CPU-efficient execution
+Metrics intended for evaluation:
+- Average inference latency
+- Throughput improvement
+- CPU efficiency
 
-Detailed benchmarks are available in benchmark.md
+### Execution Status
+>  **Benchmarks were not executed** at the time of submission  
+> due to lack of access to Intel DevCloud or Intel Xeon–based hardware.
+
+All scripts, configurations, and documentation are provided
+to enable **reproducible benchmarking** on Intel infrastructure.
+
+### Expected Outcome (Indicative)
+Based on Intel OpenVINO documentation and prior studies:
+- Reduced inference latency on Intel CPUs
+- Improved throughput
+- Efficient CPU utilization
+
+These are **expected trends**, not measured results.
+
+Detailed execution steps are provided in:
+- `intel/devcloud_setup.md`
+- `benchmark.md`
+
+  Benchmark methodology and planned evaluation steps are documented in `benchmark.md`
+  ---
 
 ## Deliverables Included
 
