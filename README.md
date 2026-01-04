@@ -8,7 +8,7 @@ It is designed to support **Intel® OpenVINO™ optimizations** for ML-based age
 
 ---
 
-## 🚀 Problem Statement Alignment
+##  Problem Statement Alignment
 
 **Problem Statement – Build Your Own AI Agent Framework**
 
@@ -40,7 +40,7 @@ AgentFlow satisfies the requirements by providing:
 
 ---
 
-## 🧠 Why AgentFlow is a Framework
+##  Why AgentFlow is a Framework
 
 AgentFlow provides:
 - A **Flow Engine** to define agentic task flows
@@ -164,6 +164,7 @@ from intel.model.openvino_model import OpenVINOModel
 
 model = OpenVINOModel("model.xml")
 result = model.infer(input_data)
+```
 ---
 ## Observability & Auditing
 AgentFlow provides:
@@ -189,13 +190,13 @@ Pluggable rule-based enforcement
 ```bash
 python kafka/consumer.py
 python kafka/producer.py
-
+```
 
 # Output Example
 ![Alt text] output1.jpeg
 ![Alt text] output2.jpeg
 
-
+---
 ## 🧩 Airflow Integration (Optional)
 
 AgentFlow includes an **Apache Airflow DAG** to enable production-grade orchestration.
@@ -212,6 +213,7 @@ airflow_dag/agentflow_dag.py
 ### Trigger the DAG
 ```bash
 airflow dags trigger agentflow_dag
+```
 ---
 
 ## Deliverables Included
