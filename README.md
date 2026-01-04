@@ -82,7 +82,7 @@ AgentFlow provides:
 - **Apache Kafka** for ingress and messaging
 - **Apache Airflow** for optional DAG orchestration
 
-You **build agents and workflows on top of AgentFlow**, making it a reusable framework.
+We **build agents and workflows on top of AgentFlow**, making it a reusable framework.
 
 ---
 
