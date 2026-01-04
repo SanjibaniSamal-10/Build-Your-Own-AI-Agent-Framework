@@ -1,5 +1,4 @@
-
-##  Observability
+## Observability
 
 AgentFlow includes built-in observability to enable **monitoring, debugging, and auditing** of agentic workflows.
 
@@ -14,13 +13,14 @@ AgentFlow includes built-in observability to enable **monitoring, debugging, and
 - Errors, exceptions, retries, and timeouts
 
 ### Sample Logs
-Executed search in 0.02 sec 
-Executed summary in 0.00 sec
+- Executed search in 0.02 sec
+- Executed summary in 0.00 sec
 
 ### Auditability
 - Each workflow execution is logged with timestamps
 - Agent actions can be replayed from logs for debugging
 - Logs provide a clear execution trace across agents
 
-> Observability is implemented using Python logging utilities and can be extended to integrate
-> external monitoring systems such as Prometheus, ELK, or OpenTelemetry.
+### Extensibility
+- Observability is implemented using Python logging utilities
+- Can be extended to integrate with external monitoring systems such as Prometheus, ELK, or OpenTelemetry
