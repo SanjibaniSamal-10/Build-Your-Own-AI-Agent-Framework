@@ -350,7 +350,7 @@ python kafka/producer.py
 ```
 
 # Output Example
-![Alt text] output1.jpeg
+![image alt](https://github.com/SanjibaniSamal-10/Build-Your-Own-AI-Agent-Framework/blob/2fbe8873e6079a153aa5ac1d38a81b0c6569e1b9/output1.jpeg)
 ![Alt text] output2.jpeg
 
 ---
