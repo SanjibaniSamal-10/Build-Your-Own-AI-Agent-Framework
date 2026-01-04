@@ -1,91 +1,253 @@
-# AI Agent Framework - Design Document
-## Objective
-Design a reusable AI Agent Framework that enables orchestration of agentic workflows without using existing agent frameworks.
+# Design Document – AgentFlow AI Agent Framework
+
+## 1. Purpose
+
+AgentFlow is a **framework-level system** for building and executing AI agent workflows.
+Unlike single-purpose AI applications, AgentFlow provides reusable abstractions for:
+
+- Defining agentic workflows
+- Orchestrating multi-agent execution
+- Integrating Apache-based infrastructure
+- Monitoring and auditing executions
+- Optimizing ML inference for Intel platforms
+
+This document explains the **design rationale**, **key abstractions**, and **engineering decisions** behind AgentFlow.
 
 ---
 
-## Design Principles
+## 2. Design Goals
 
-- Modularity
-- Extensibility
-- Observability
-- Reliability
-- Framework-first (not app-specific)
+### Primary Goals
+- Build a **true agent framework**, not a hardcoded app
+- Support **task-flow-based agent orchestration**
+- Enable **multi-agent collaboration**
+- Integrate **Apache Kafka** and **Airflow**
+- Provide **observability and auditability**
+- Remain **Intel optimization ready**
 
-## Overview
-This framework allows defining agentic workflows as DAGs composed of tasks executed by modular executors. Memory, guardrails, and observability are included.
-
-## Architecture
-- Ingress (Kafka/REST)
-- Orchestrator
-- Executors (tools)
-- State/Memory
-- Airflow DAG for orchestration
-
-## Core Features
-1. DAG-based flows
-2. Input/Output handlers
-3. Guardrails and policies
-4. Observability (logs, metrics)
-5. Intel Tech support (OpenVINO optimization)
-
-
-## Multi -Agent Setup
-1. Reference Agent: Core planner agent that routes tasks to other agents.
-2. Research Agent: Performs web searches, retrieves information.
-3. Collab Agent: Combines results, summarizes, or collaborates across agents. 
-
-## Apache Components
-- Kafka for message queue (ingress)
-- Airflow DAG for orchestration
-
-## Intel OpenVINO Benchmark
-- Pre-optimization: PyTorch
-- Post-optimization: OpenVINO
-- Results:
-  - PyTorch Avg Latency: 120 ms
-  - OpenVINO Avg Latency: 45 ms (~2.6x speedup)
-  ## Core Components
-
-### Task
-Represents a single unit of work.
-
-### Flow
-Defines ordering and dependency between tasks (DAG).
-
-### Orchestrator
-Controls task execution, retries, and state transitions.
-
-### Executor
-Runs actual task logic (search, summarize, etc.).
-
-### Agents
-High-level reasoning units coordinating tasks.
-
-### Memory
-Stores intermediate context and outputs.
-
-### Guardrails
-Validates input/output and prevents unsafe execution.
-
-## Observability
-- Logger and metrics track each task execution
-
-## Extensibility
-- Users can add new flows, tasks, tools, and policies via SDK
-
-## Execution Lifecycle
-
-1. Input received
-2. Planner agent selects flow
-3. Tasks executed sequentially or conditionally
-4. State stored in memory
-5. Output returned and logged
+### Non-Goals
+- Full UI-based workflow editor
+- Vendor-locked LLM integrations
+- Auto-generated reasoning chains
 
 ---
 
-## Reliability
+## 3. High-Level Design Principles
 
-- Retry logic
-- Timeout handling
-- Graceful failure logging
+- **Modularity:** Components are loosely coupled
+- **Extensibility:** New agents, tools, and flows can be added easily
+- **Event-Driven:** Kafka-based message flow
+- **Framework-Controlled Execution:** No hardcoded agent logic
+- **Separation of Concerns:** Clear boundaries between orchestration, agents, tools, and memory
+
+---
+
+## 4. Core Framework Abstractions
+
+### 4.1 Agent Abstraction
+
+Agents represent autonomous units of reasoning.
+
+**Agent Interface:**
+- `name`
+- `execute(task, memory)`
+- `allowed_tools`
+- `guardrail_policies`
+
+**Implemented Agents:**
+- Reference Agent
+- Research Agent
+- Collab Agent
+
+Each agent is independent and stateless by design, relying on shared memory.
+
+---
+
+### 4.2 Task Abstraction
+
+A **Task** represents a single unit of work.
+
+**Task Properties:**
+- `task_id`
+- `task_type`
+- `input`
+- `status`
+- `retry_count`
+
+Tasks are executed by agents and managed by the Task Flow Engine.
+
+---
+
+### 4.3 Flow Abstraction
+
+Flows define **how tasks are composed and executed**.
+
+**Flow Types Supported:**
+- Sequential flows
+- DAG-like execution (future extensibility)
+
+Flows enable:
+- Deterministic execution
+- Retry and failure handling
+- Observability per task
+
+---
+
+### 4.4 Orchestrator
+
+The Orchestrator is the **control plane** of AgentFlow.
+
+**Responsibilities:**
+- Receive input events
+- Select appropriate flows
+- Dispatch tasks to agents
+- Manage execution lifecycle
+- Handle failures and retries
+
+The orchestrator does not contain business logic—it enforces framework rules.
+
+---
+
+## 5. Messaging & Orchestration Design
+
+### 5.1 Kafka-Based Execution
+
+Kafka is used for:
+- Input ingestion
+- Workflow triggering
+- Decoupling producers and consumers
+
+**Benefits:**
+- Fault tolerance
+- Scalability
+- Replayability
+
+---
+
+### 5.2 Airflow Integration (Optional)
+
+Airflow provides:
+- Scheduled execution
+- Visual DAG management
+- Retry and fault tolerance
+
+Airflow complements Kafka for production-grade workflows.
+
+---
+
+## 6. Memory & State Design
+
+AgentFlow uses **shared memory** to enable collaboration.
+
+**Memory Features:**
+- Stores intermediate agent outputs
+- Enables reflection and refinement
+- Supports workflow context persistence
+
+Current implementation uses **in-memory storage**, with clear extension points for databases or vector stores.
+
+---
+
+## 7. Guardrails & Safety Design
+
+Guardrails enforce execution policies.
+
+**Examples:**
+- Allowed tool checks
+- Maximum retries
+- Timeout limits
+- Agent execution constraints
+
+Guardrails are evaluated before and after agent execution.
+
+---
+
+## 8. Observability & Audit Design
+
+### Metrics
+- Task execution time
+- Workflow latency
+- Failure rates
+
+### Logs
+- Agent decisions
+- Task start/end
+- Errors and retries
+
+This ensures:
+- Debuggability
+- Auditing
+- Performance analysis
+
+---
+
+## 9. Intel Optimization Design
+
+### Motivation
+ML inference is often CPU-bound in production environments.
+
+### Implementation
+- Baseline PyTorch model
+- Optimized OpenVINO model
+- CPU-only benchmarks
+
+### Outcome
+- Reduced latency
+- Increased throughput
+- Intel DevCloud compatibility
+
+---
+
+## 10. Reference Workflows
+
+### Workflow 1: Research & Summarization
+- Input query
+- Research Agent gathers information
+- Reference Agent structures content
+- Collab Agent refines final output
+
+### Workflow 2: Multi-Agent Collaboration
+- Agents share memory
+- Iterative refinement
+- Reflection-driven improvements
+
+---
+
+## 11. Failure Handling & Reliability
+
+- Retry policies at task level
+- Timeout enforcement
+- Graceful failure propagation
+- Partial workflow recovery
+
+This ensures reliable execution under failure conditions.
+
+---
+
+## 12. Limitations
+
+- In-memory storage (demo scope)
+- Limited reasoning depth per agent
+- Airflow not supported on Windows natively
+
+These limitations are intentional and extensible.
+
+---
+
+## 13. Future Enhancements
+
+- Persistent vector memory
+- Parallel task execution
+- Human-in-the-loop steps
+- Policy-based agent selection
+- Advanced DAG execution
+
+---
+
+## 14. Conclusion
+
+AgentFlow is designed as a **production-oriented AI Agent Framework**.
+Its modular architecture, Apache-based orchestration, observability, and Intel optimization support make it suitable for
+both research and real-world deployments.
+
+The design fulfills all core requirements of the problem statement while remaining extensible for future growth.
