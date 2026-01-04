@@ -129,13 +129,16 @@ Output Handler
 | Human-in-the-loop | Hooks can be added in `guardrails.py` |
 
 ---
-## Project Structure 
 
+##  Project Structure
+
+```text
 agentflow-framework/
-├── __pycache__
+├── __pycache__/
+│
 ├── agentflow/
-|   ├── __pycache__
-|   ├── init.py
+│   ├── __pycache__/
+│   ├── __init__.py
 │   ├── task.py              # Task abstraction
 │   ├── flow.py              # Task flow (DAG-style execution)
 │   ├── orchestrator.py      # Central workflow controller
@@ -145,13 +148,13 @@ agentflow-framework/
 │   └── observability.py     # Logs & metrics
 │
 ├── agents/
-|   ├── __pycache__
+│   ├── __pycache__/
 │   ├── reference_agent.py   # Reference agent
 │   ├── research_agent.py    # Research agent
 │   └── collab_agent.py      # Collaboration agent
 │
 ├── executors/
-|   ├── __pycache__
+│   ├── __pycache__/
 │   ├── search.py            # Search tool
 │   └── summarize.py         # Summarization tool
 │
@@ -162,6 +165,14 @@ agentflow-framework/
 ├── airflow_dag/
 │   └── agentflow_dag.py     # Optional Airflow DAG
 │
+├── airflow_home/
+│   ├── dags/
+│   │   └── agentflow_dag.py
+│   ├── logs/
+│   ├── airflow.cfg
+│   ├── airflow.db
+│   └── webserver_config.py
+│
 ├── intel/
 │   ├── model/
 │   │   ├── pytorch_model.py
@@ -170,29 +181,31 @@ agentflow-framework/
 │   │   ├── benchmark_pytorch.py
 │   │   ├── benchmark_openvino.py
 │   │   └── results.md
-|   ├── devcloud_setup.md
+│   └── devcloud_setup.md
+│
 ├── io/
-│   ├── input_handler.py          
-│   └── output_handler.py
+│   ├── input_handler.py     # Input interface
+│   └── output_handler.py    # Output interface
+│
 ├── venv/
-|   ├── bin/
+│   ├── bin/
 │   ├── Include/
 │   ├── Lib/
-|   ├── Scripts/
+│   ├── Scripts/
 │   └── pyvenv.cfg
 │
 ├── run_agent.py             # Framework entry point
-├── ARCHITECTURE.md
-├── DESIGN_DOC.md
-├── benchmark.md
-├── PERFORMANCE_REPORT.md
-├── OBSERVABILITY.md
-├── WORKFLOW.md
-├── LIMITATION.md
-├── SETUP_GUIDE.md
+│
+├── ARCHITECTURE.md          # System architecture
+├── DESIGN_DOC.md            # Design documentation
+├── benchmark.md             # Performance benchmarks
+├── PERFORMANCE_REPORT.md    # Intel optimization results
+├── OBSERVABILITY.md         # Logging & metrics
+├── WORKFLOW.md              # Agent workflows
+├── LIMITATION.md            # Known limitations
+├── SETUP_GUIDE.md           # Installation & setup
 ├── README.md
-└── LICENSE
-
+└── LICENSE 
 ---
 ## Agents Included
 
