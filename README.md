@@ -218,20 +218,28 @@ airflow dags trigger agentflow_dag
 
 ## Deliverables Included
 This repository fulfills all required deliverables:
+
 ✅ Framework SDK for defining flows, agents, and policies
+
 ✅ Three working agents
+
 Reference Agent
 Research Agent
 Collaboration Agent
+
 ✅ Apache Kafka integration for ingress and messaging
+
 ✅ Apache Airflow orchestration support (optional)
+
 ✅ Intel OpenVINO optimization support
+
 ✅ Design documentation (DESIGN_DOC.md)
+
 ✅ Benchmark scripts (PyTorch vs OpenVINO)
 
 ---
 
-##Conclusion
+## Conclusion
 AgentFlow is a production-oriented AI Agent Framework that:
 ❌ Uses no external agent frameworks (crew.ai, AutoGen, n8n)
 ✅ Supports Apache-based orchestration (Kafka, Airflow)
@@ -239,4 +247,4 @@ AgentFlow is a production-oriented AI Agent Framework that:
 ✅ Provides observability, memory, and guardrails
 ✅ Is Intel optimization-ready using OpenVINO
 AgentFlow demonstrates how agentic workflows can be built from first principles, making it suitable for research, enterprise experimentation, and system design evaluations.
----
+
