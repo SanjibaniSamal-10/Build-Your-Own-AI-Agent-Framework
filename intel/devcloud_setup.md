@@ -1,71 +1,119 @@
-# Intel DevCloud Setup & Execution Guide
+# Intel DevCloud – Planned Execution & Benchmark Readiness
 
-This document describes how to run the AgentFlow framework benchmarks on **Intel DevCloud** using **OpenVINO** and **PyTorch**.
+This document describes how **AgentFlow is prepared to be executed and benchmarked**
+on **Intel® DevCloud** using Intel® OpenVINO™.
+
+> ⚠️ **Disclaimer**
+> The benchmarks described below were **not executed** due to lack of access to
+> Intel DevCloud and Intel Xeon–based hardware at the time of submission.
+>  
+> This document demonstrates **benchmark readiness**, **correct integration**,
+> and **reproducible steps** for execution on Intel infrastructure.
 
 ---
 
-## 1. Login to Intel DevCloud
+## Purpose
 
-Login to Intel DevCloud using your assigned credentials:
+- Demonstrate that AgentFlow is **compatible with Intel DevCloud**
+- Provide **clear and reproducible steps** for execution
+- Show correct **OpenVINO integration** for ML optimization
+- Align with Intel benchmarking expectations
 
+---
+
+## Intended Execution Environment
+
+| Component | Expected Setup |
+|---------|----------------|
+| CPU | Intel® Xeon® Processor |
+| OS | Linux (Ubuntu recommended) |
+| Python | 3.9 / 3.10 |
+| Acceleration | CPU (OpenVINO) |
+
+---
+
+## Planned DevCloud Execution Steps
+
+### 1. Access Intel DevCloud
+- Log in to Intel® DevCloud
+- Allocate a CPU compute node
+
+---
+
+### 2. Load OpenVINO Environment
 ```bash
-ssh <username>@login-2.devcloud.intel.com
-```
-
-## 2. Allocate a Compute Node
-Request an interactive Intel Xeon CPU node:
-
-```Bash
-qsub -I -l nodes=1:xeon -l walltime=02:00:00
-```
-
-## 3. Load Required Environment
-Load the OpenVINO environment module:
-
-```Bash
 module load openvino
 ```
-Verify the installation:
+Verify OpenVINO:
 ```Bash
-python -c "import openvino; print(openvino.__version__)"
+benchmark_app --help
 ```
-## 4. Install Project Dependencies
-Navigate to the project root directory and install required dependencies:
-
+## 3. Install Dependencies
+   
 ```Bash
-pip install transformers torch openvino
+pip install torch transformers openvino openvino-dev numpy
 ```
-(Optional: Use a Python virtual environment if required.)
-
-## 5. Run Performance Benchmarks
-Navigate to the benchmark directory:
-
+## 4. Navigate to Benchmark Directory
 ```Bash
 cd intel/benchmark
 ```
-Run the PyTorch benchmark:
-
-```Bash
+## 5. Planned Baseline Benchmark (PyTorch)
+```
+Bash
 python benchmark_pytorch.py
 ```
-Run the OpenVINO benchmark:
+Executes ML inference using PyTorch (CPU)
+Measures average inference latency
+
+## 6. Planned Optimized Benchmark (OpenVINO)
+
 ```Bash
 python benchmark_openvino.py
 ```
-## 6. Benchmark Results
-Benchmarks were executed on Intel Xeon CPU
+Converts model to OpenVINO IR
 
-CPU-only inference was used
+Runs inference using OpenVINO Runtime
 
-Latency and throughput metrics were collected
+Measures optimized inference latency
 
-Results are documented in:
-```Text
-intel/benchmark/results.md
-```
-## 7. Notes
-Same model architecture used for fair comparison
+### Benchmark Scope
+Inference-only benchmarking
 
-OpenVINO demonstrates significant inference speedupover PyTorch
+Same model architecture for both runs
 
-Suitable for Intel optimization validation and benchmarking
+CPU-only execution
+
+Latency comparison
+
+### Expected Outcome
+Based on Intel OpenVINO documentation and prior studies:
+
+Reduced inference latency on Intel CPUs
+
+Improved throughput
+
+No changes required in agent logic
+
+These are expected trends, not measured results.
+
+### Reproducibility
+All benchmark scripts are:
+
+Included in the repository
+
+Framework-agnostic
+
+Hardware-independent
+
+Ready to execute on Intel DevCloud or equivalent Intel CPU systems
+
+## Conclusion
+Although execution was not performed due to hardware access limitations, AgentFlow:
+
+Fully integrates Intel OpenVINO
+
+Includes complete benchmark scripts
+
+Is ready for execution on Intel DevCloud
+
+Demonstrates correct architectural alignment with Intel optimization workflows
