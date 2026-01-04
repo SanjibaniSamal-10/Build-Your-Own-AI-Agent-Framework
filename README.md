@@ -86,21 +86,7 @@ We **build agents and workflows on top of AgentFlow**, making it a reusable fram
 
 ---
 
-##  Architecture Overview
 
-Ingress (Kafka / REST)
-    ↓
-Orchestrator
-    ↓
-Task Flow Engine
-    ↓
-Agents / Executors ( Tools & Agents)
-(Reference | Research | Collab)
-    ↓
-State / Memory / Guardrails
-    ↓
-Output Handler
----
 
 ##  High-Level Guidelines Implemented
 
