@@ -241,10 +241,16 @@ Collaboration Agent
 
 ## Conclusion
 AgentFlow is a production-oriented AI Agent Framework that:
+
 ❌ Uses no external agent frameworks (crew.ai, AutoGen, n8n)
+
 ✅ Supports Apache-based orchestration (Kafka, Airflow)
+
 ✅ Enables multi-agent collaboration
+
 ✅ Provides observability, memory, and guardrails
+
 ✅ Is Intel optimization-ready using OpenVINO
+
 AgentFlow demonstrates how agentic workflows can be built from first principles, making it suitable for research, enterprise experimentation, and system design evaluations.
 
