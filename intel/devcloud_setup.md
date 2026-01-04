@@ -54,7 +54,9 @@ python benchmark_openvino.py
 ```
 ## 6. Benchmark Results
 Benchmarks were executed on Intel Xeon CPU
+
 CPU-only inference was used
+
 Latency and throughput metrics were collected
 
 Results are documented in:
@@ -63,5 +65,7 @@ intel/benchmark/results.md
 ```
 ## 7. Notes
 Same model architecture used for fair comparison
-OpenVINO demonstrates significant inference speedup over PyTorch
+
+OpenVINO demonstrates significant inference speedupover PyTorch
+
 Suitable for Intel optimization validation and benchmarking
