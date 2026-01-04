@@ -13,7 +13,7 @@ The system is designed around **event-driven execution**, **task flow orchestrat
 ## 2. High-Level Architecture
 
 The AgentFlow architecture follows a layered pipeline:
-
+```text
 Ingress (Kafka / REST) 
       ↓ 
 Orchestrator 
@@ -26,6 +26,7 @@ State / Memory / Guardrails
       ↓ 
 Output Handler
 
+```
 Each layer is:
 - Loosely coupled
 - Independently testable
