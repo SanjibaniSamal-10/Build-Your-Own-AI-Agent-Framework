@@ -48,6 +48,8 @@ This document explains the **design rationale**, **key abstractions**, and **eng
 
 Agents represent autonomous units of reasoning.
 
+Agents follow deterministic, framework-controlled execution rather than free-form autonomous planning.
+
 **Agent Interface:**
 - `name`
 - `execute(task, memory)`
@@ -191,10 +193,10 @@ ML inference is often CPU-bound in production environments.
 - Optimized OpenVINO model
 - CPU-only benchmarks
 
-### Outcome
-- Reduced latency
-- Increased throughput
-- Intel DevCloud compatibility
+### Outcome (Indicative):
+-Potential latency reduction
+-Improved throughput on Intel CPUs
+-Verified via benchmark scripts (execution environment dependent)
 
 ---
 
