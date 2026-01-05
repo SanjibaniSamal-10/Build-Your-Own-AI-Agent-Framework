@@ -310,9 +310,9 @@ Logging:
 ---
 ## Guardrails & Safety
 
-Policy checks before and after execution
-Human-in-the-loop extension points
-Pluggable rule-based enforcement
+- Policy checks before and after execution
+- Human-in-the-loop extension points
+- Pluggable rule-based enforcement
 
 --- 
 ## Apache Integration
