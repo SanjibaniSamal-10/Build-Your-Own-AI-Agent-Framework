@@ -284,23 +284,28 @@ OpenVINO benchmarking is prepared but not executed in this submission due to lac
 ## Observability & Auditing
 AgentFlow provides:
 
-Execution logs
-Agent-level metrics
-Workflow traceability
-Error visibility
+- Execution logs
+
+- Agent-level metrics
+  
+- Workflow traceability
+  
+- Error visibility
 This enables monitoring, debugging, and auditing of agent workflows.
 
-Metrics Collected
+Metrics Collected:
 
-Task execution time
-Total workflow latency
-Failure counts
+- Task execution time
 
-Logging
+- Total workflow latency
+  
+- Failure counts
 
-Task start/end
-Agent decisions
-Errors and retries
+Logging: 
+
+- Task start/end
+- Agent decisions
+- Errors and retries
 
 ---
 ## Guardrails & Safety
