@@ -29,8 +29,14 @@ Steps:
 
 ## Sample Logs:
 ``` Text
-Kafka Consumer started... Received: {'query': 'AI Agent Framework'}
---- Agent Flow Started --- Reference Agent: routing task Research Agent: searching for information Executed search in 0.02 sec Collab Agent: refining output Executed refinement in 0.01 sec --- Agent Flow Completed ---
+Kafka Consumer started...
+Received: {'query': 'AI Agent Framework'}
+--- Agent Flow Started ---
+Reference Agent: routing task
+Research Agent: searching for information Executed search in 0.02 sec
+Collab Agent: refining output
+Executed refinement in 0.01 sec
+--- Agent Flow Completed ---
 
 ```
 ---
