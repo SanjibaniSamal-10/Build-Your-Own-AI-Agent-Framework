@@ -324,8 +324,11 @@ Logging:
 
 ### Airflow 
 Used for:
+
 1.Scheduled execution
+
 2.Retry handling
+
 3.Fault tolerance
 ## How to Run (Minimal Demo)
 
